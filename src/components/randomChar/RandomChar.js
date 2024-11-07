@@ -11,7 +11,8 @@ class RandomChar extends Component {
     }
 
     state = {
-        char: {}
+        char: {},
+        loading: true,
     }
 
     marvelService = new MarvelService();
@@ -28,7 +29,7 @@ class RandomChar extends Component {
     }
 
     render() {
-        const { char: { name, description, thumbnail, homepage, wiki } } = this.state;
+        const { char: { name, description, thumbnail, homepage, wiki }, loading} = this.state;
         return (
             <div className="randomchar">
                 <div className="randomchar__block">
