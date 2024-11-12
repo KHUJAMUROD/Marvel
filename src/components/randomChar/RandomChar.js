@@ -8,7 +8,8 @@ import mjolnir from '../../resources/img/mjolnir.png';
 class RandomChar extends Component {
     constructor(props) {
         super(props);
-        // setInterval(this.updateChar, 3000);
+        setInterval(this.updateChar, 3000);
+        console.log('constructor');
     }
 
     state = {
@@ -19,21 +20,28 @@ class RandomChar extends Component {
 
     marvelService = new MarvelService();
 
- 
+    componentDidMount() {
+        console.log('Mount');
+    }
+    componentWillUnmount() {
+        console.log('Unmount');
+    }
+
+
     onCharLoaded = (char) => {
         console.log('update');
-        
+
         this.setState({
             char,
             loading: false,
-         })
+        })
     }
 
     onError = () => {
         this.setState({
             loading: false,
             error: true,
-         })
+        })
     }
 
 
@@ -46,16 +54,17 @@ class RandomChar extends Component {
     }
 
     render() {
+        console.log('render');
         const { char, loading, error } = this.state;
         const errorMessage = error ? <ErrorMessage /> : null;
         const spinner = loading ? <Spinner /> : null;
         const content = !(loading || error) ? <View char={char} /> : null;
-        
+
         return (
             <div className="randomchar">
-               {errorMessage}
-               {spinner}
-               {content}
+                {errorMessage}
+                {spinner}
+                {content}
                 <div className="randomchar__static">
                     <p className="randomchar__title">
                         Random character for today!<br />
