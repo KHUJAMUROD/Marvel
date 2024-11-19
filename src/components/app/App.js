@@ -4,14 +4,10 @@ import RandomChar from "../randomChar/RandomChar";
 import CharList from "../charList/CharList";
 import CharInfo from "../charInfo/CharInfo";
 
-
-
 import decoration from '../../resources/img/vision.png';
 
-
-
 class App extends Component {
-
+    
     state = {
         selectedChar: null
     }
@@ -21,7 +17,7 @@ class App extends Component {
             selectedChar: id
         })
     }
-    
+
     render() {
         return (
             <div className="app">
