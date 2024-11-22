@@ -21,7 +21,7 @@ class CharInfo extends Component {
         this.updateChar();
     }
 
-    componentDidUpdate(prevProps){
+    componentDidUpdate(prevProps) {
         if (this.props.charId !== prevProps.charId) {
             this.updateChar();
         }
@@ -30,7 +30,7 @@ class CharInfo extends Component {
 
 
     updateChar = () => {
-        const {charId} = this.props;
+        const { charId } = this.props;
         if (!charId) {
             return;
         }
@@ -42,12 +42,12 @@ class CharInfo extends Component {
             .then(this.onCharLoaded)
             .catch(this.onError);
 
-            this.foo.bar = 0;
+        // this.foo.bar = 0;
     }
 
     onCharLoaded = (char) => {
         this.setState({
-            char, 
+            char,
             loading: false
         })
     }
@@ -66,12 +66,12 @@ class CharInfo extends Component {
     }
 
     render() {
-        const {char, loading, error} = this.state;
+        const { char, loading, error } = this.state;
 
-        const skeleton = char || loading || error ? null : <Skeleton/>;
-        const errorMessage = error ? <ErrorMessage/> : null;
-        const spinner = loading ? <Spinner/> : null;
-        const content = !(loading || error || !char) ? <View char={char}/> : null;
+        const skeleton = char || loading || error ? null : <Skeleton />;
+        const errorMessage = error ? <ErrorMessage /> : null;
+        const spinner = loading ? <Spinner /> : null;
+        const content = !(loading || error || !char) ? <View char={char} /> : null;
 
         return (
             <div className="char__info">
@@ -84,18 +84,18 @@ class CharInfo extends Component {
     }
 }
 
-const View = ({char}) => {
-    const {name, description, thumbnail, homepage, wiki, comics} = char;
+const View = ({ char }) => {
+    const { name, description, thumbnail, homepage, wiki, comics } = char;
 
-    let imgStyle = {'objectFit' : 'cover'};
+    let imgStyle = { 'objectFit': 'cover' };
     if (thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
-        imgStyle = {'objectFit' : 'contain'};
+        imgStyle = { 'objectFit': 'contain' };
     }
 
     return (
         <>
             <div className="char__basics">
-                <img src={thumbnail} alt={name} style={imgStyle}/>
+                <img src={thumbnail} alt={name} style={imgStyle} />
                 <div>
                     <div className="char__info-name">{name}</div>
                     <div className="char__btns">
@@ -124,7 +124,7 @@ const View = ({char}) => {
                             </li>
                         )
                     })
-                }                
+                }
             </ul>
         </>
     )
