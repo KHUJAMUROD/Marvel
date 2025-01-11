@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import Spinner from '../spinner/Spinner';
@@ -8,28 +8,24 @@ import './charList.scss';
 
 const CharList = (props) => {
 
-    const [charList, setCharList] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(false)
-    const [newItemLoading, setNewItemLoading] = useState(false)
-    const [offset, setOffset] = useState(210)
-    const [charEnded, setCharEnded] = useState(false)
-
-
+    const [charList, setCharList] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+    const [newItemLoading, setNewItemLoading] = useState(false);
+    const [offset, setOffset] = useState(210);
+    const [charEnded, setCharEnded] = useState(false);
 
     const marvelService = new MarvelService();
 
     useEffect(() => {
-        this.onRequest();
+        onRequest();
     }, [])
-
-
 
     const onRequest = (offset) => {
         onCharListLoading();
         marvelService.getAllCharacters(offset)
-            .then(this.onCharListLoaded)
-            .catch(this.onError)
+            .then(onCharListLoaded)
+            .catch(onError)
     }
 
     const onCharListLoading = () => {
@@ -42,12 +38,11 @@ const CharList = (props) => {
             ended = true;
         }
 
-
-        setCharList(charList => [...charList, ...newCharList])
-        setLoading(loading => false)
-        setNewItemLoading(newItemLoading => false)
-        setOffset(offset => offset + 9)
-        setCharEnded(charEnded => ended)
+        setCharList(charList => [...charList, ...newCharList]);
+        setLoading(loading => false);
+        setNewItemLoading(newItemLoading => false);
+        setOffset(offset => offset + 9);
+        setCharEnded(charEnded => ended);
     }
 
     const onError = () => {
@@ -57,11 +52,7 @@ const CharList = (props) => {
 
     const itemRefs = useRef([]);
 
-    // setRef = (ref) => {
-    //     this.itemRefs.push(ref);
-    // }
-
-    focusOnItem = (id) => {
+    const focusOnItem = (id) => {
         // Я реализовал вариант чуть сложнее, и с классом и с фокусом
         // Но в теории можно оставить только фокус, и его в стилях использовать вместо класса
         // На самом деле, решение с css-классом можно сделать, вынеся персонажа
@@ -87,7 +78,7 @@ const CharList = (props) => {
                 <li
                     className="char__item"
                     tabIndex={0}
-                    ref={el => itemsRef.current[i] = el}
+                    ref={el => itemRefs.current[i] = el}
                     key={item.id}
                     onClick={() => {
                         props.onCharSelected(item.id);
@@ -112,14 +103,12 @@ const CharList = (props) => {
         )
     }
 
-
-    // const { charList, loading, error, offset, newItemLoading, charEnded } = this.state;
-
     const items = renderItems(charList);
 
     const errorMessage = error ? <ErrorMessage /> : null;
     const spinner = loading ? <Spinner /> : null;
     const content = !(loading || error) ? items : null;
+
 
     return (
         <div className="char__list">
