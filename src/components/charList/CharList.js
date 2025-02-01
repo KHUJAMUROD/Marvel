@@ -27,7 +27,6 @@ const CharList = (props) => {
 
     const onCharListLoaded = async (newCharList) => {
 
-        const {logger, secondLog} = await import('./someFunk');
 
         let ended = false;
         if (newCharList.length < 9) {
@@ -100,7 +99,7 @@ const CharList = (props) => {
 
     if (loading) {
         import('./someFunk')
-        .then(obj => obj.logger())
+        .then(obj => obj.default())
         .catch()
     }
 
